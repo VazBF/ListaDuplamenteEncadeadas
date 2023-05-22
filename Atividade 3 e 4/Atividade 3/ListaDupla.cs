@@ -1,0 +1,65 @@
+﻿namespace Atividade_3
+{
+    public class ListaDupla
+    {
+        Celula first;
+        Celula last;
+        int qtdElement = 0;
+        public void addBeginning(Object element)
+        {
+            if (qtdElement == 0)
+            {
+                Celula nova = new Celula(element);
+                first = nova;
+                last = nova;
+                qtdElement++;
+            }
+            else
+            {
+                Celula nova = new Celula(first, element);
+                first.setAnterior(nova);
+                first = nova;
+                nova.setAnterior(last);
+                last.setProxima(first);
+                qtdElement++;
+            }
+        }
+        public void addEnd(Object element)
+        {
+            if (qtdElement == 0)
+            {
+                addBeginning(element);
+            }
+            else
+            {
+                Celula nova = new Celula(element);
+                last.setProxima(nova);
+                nova.setAnterior(last);
+                nova.setProxima(first);
+                first.setAnterior(last);
+                last = nova;
+                qtdElement++;
+            }
+        }
+        public int lenght()
+        {
+            return qtdElement;
+        }
+        public Celula GetCelula(int pos)
+        {
+            if (pos >= 0 && pos <= qtdElement)
+            {
+                Celula aux = first;
+                for (int i = 0; i < pos; i++)
+                {
+                    aux = aux.getProxima();
+                }
+                return aux;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+}
